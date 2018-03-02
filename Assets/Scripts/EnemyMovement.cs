@@ -8,7 +8,7 @@ public class EnemyMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine(PrintAllWaypoints());
+        //StartCoroutine(FollowPath());
 		
 	}
 	
@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour {
     {
     }
 
-    IEnumerator PrintAllWaypoints()
+    IEnumerator FollowPath()
     {
         print("Starting Patrol...");
         foreach (Waypoint waypoint in path)

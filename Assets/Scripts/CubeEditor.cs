@@ -9,7 +9,6 @@ public class CubeEditor : MonoBehaviour {
 
 	Waypoint waypoint;
 	int gridSize;
-
 	Vector2Int gridPos;
 
 	void Awake()
@@ -17,12 +16,6 @@ public class CubeEditor : MonoBehaviour {
 		waypoint = GetComponent<Waypoint>();
 		gridSize = waypoint.GetGridSize();
 	}
-
-
-	void Start () {
-
-	}
-	
 
 	void Update ()
     {
