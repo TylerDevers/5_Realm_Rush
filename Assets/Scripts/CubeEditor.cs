@@ -8,14 +8,12 @@ using UnityEngine;
 public class CubeEditor : MonoBehaviour {
 
 	Waypoint waypoint;
-	int gridSize;
 	Vector2Int gridPos;
 
 	void Awake()
 	{
 		waypoint = GetComponent<Waypoint>();
-		gridSize = waypoint.GetGridSize();
-	}
+    }	
 
 	void Update ()
     {
@@ -25,17 +23,17 @@ public class CubeEditor : MonoBehaviour {
 
     private void SnapToGrid()
     {
-
+        int gridSize = waypoint.GetGridSize();
         transform.position = new Vector3(
-		waypoint.GetGridPos().x,
+		waypoint.GetGridPos().x * gridSize,
 		0, 
-		waypoint.GetGridPos().y
+		waypoint.GetGridPos().y * gridSize
 		);
     }
 
     private void UpdateLabel()
     {
-        string labelText = waypoint.GetGridPos().x / gridSize + "," + waypoint.GetGridPos().y / gridSize;
+        string labelText = waypoint.GetGridPos().x + "," + waypoint.GetGridPos().y;
         TextMesh textMesh = GetComponentInChildren<TextMesh>();
         textMesh.text = labelText;
         gameObject.name = labelText;
