@@ -7,44 +7,87 @@ public class Pathfinder : MonoBehaviour {
 	[SerializeField] Waypoint startWaypoint, endWaypoint;
 
 	Dictionary<Vector2Int, Waypoint> grid = new Dictionary<Vector2Int, Waypoint>();
+	Queue<Waypoint> queue = new Queue<Waypoint>();
+
 	Vector2Int[] directions = {
 		Vector2Int.up,
 		Vector2Int.right,
 		Vector2Int.down,
 		Vector2Int.left
 	};
+    [SerializeField] bool isRunning = true;
+	Waypoint searchCenter;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
 		LoadBlocks();
 		ColorStartAndEnd();
-		ExploreNeighbors();
+		//ExploreNeighbors();
+		Pathfind();
 	}
-
-    // Update is called once per frame
+	    // Update is called once per frame
     void Update () {
 		
 	}
 
+    private void Pathfind() //using breadth first algorithm
+    {
+        queue.Enqueue(startWaypoint);
+		while(queue.Count > 0)
+		{
+			searchCenter = queue.Dequeue();
+			searchCenter.isExplored = true;
+
+			HaltIfEndFound();
+			ExploreNeighbors();
+		}
+		print("finished Pathfinding?");
+    }
+
+    private void HaltIfEndFound()
+    {
+		if (searchCenter == endWaypoint)
+		{
+			isRunning = false;
+		}
+    }
+
 	void ExploreNeighbors()
 	{
-		Vector2Int startBlock = startWaypoint.GetGridPos();
+		if (!isRunning) {return;} //prevent infinite loop when called from pathfind()
 		
 		foreach (Vector2Int direction in directions)
 		{
-			Vector2Int explorationCoordinates = startBlock + direction;
+			Vector2Int neighborCoordinates = searchCenter.GetGridPos() + direction;
 			try
-			{
-				// change color of neighbor
-				grid[explorationCoordinates].SetTopColor(Color.blue);
+            {
+                QueueNewNeighbors(neighborCoordinates);
 
-			}
-			catch
+            }
+            catch
 			{
-				print(explorationCoordinates + " Not Found");
+				//print(neighborCoordinates + " Not Found");
 			}
 		}
 	}
+
+    private void QueueNewNeighbors(Vector2Int neighborCoordinates)
+    {
+        // change color of neighbor
+        Waypoint neighbor = grid[neighborCoordinates];
+		if (neighbor.isExplored || queue.Contains(neighbor))
+		{
+			//do nothing
+		}
+		else
+		{
+			neighbor.SetTopColor(Color.blue);
+			queue.Enqueue(neighbor);
+			neighbor.exploredFrom = searchCenter;
+		}
+    }
+
     void ColorStartAndEnd()
     {
         startWaypoint.SetTopColor(Color.yellow);
