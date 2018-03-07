@@ -41,7 +41,6 @@ public class Pathfinder : MonoBehaviour {
 		}
 		path.Add(startWaypoint);
 		path.Reverse();
-		print(path);
     }
 
 
