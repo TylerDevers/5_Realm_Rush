@@ -32,15 +32,21 @@ public class Pathfinder : MonoBehaviour {
 	}
     private void CreatePath()
     {
-        path.Add(endWaypoint);
-		Waypoint previous = endWaypoint.exploredFrom;
-		while (previous != startWaypoint)
+		if (path.Count <= 0)
 		{
-			path.Add(previous);
-			previous = previous.exploredFrom;
+			path.Add(endWaypoint);
+			Waypoint previous = endWaypoint.exploredFrom;
+			while (previous != startWaypoint)
+			{
+				path.Add(previous);
+				previous = previous.exploredFrom;
+			}
+			path.Add(startWaypoint);
+			path.Reverse();
+		} else 
+		{
+			print("path already exists");
 		}
-		path.Add(startWaypoint);
-		path.Reverse();
     }
 
 

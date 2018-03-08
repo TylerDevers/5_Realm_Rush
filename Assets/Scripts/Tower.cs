@@ -37,7 +37,8 @@ public class Tower : MonoBehaviour {
 		{
 			Shoot(true);
 		}
-		else{
+		else
+		{
 			Shoot(false);
 		}
 	}
