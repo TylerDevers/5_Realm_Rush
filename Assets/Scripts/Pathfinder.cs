@@ -55,7 +55,7 @@ public class Pathfinder : MonoBehaviour {
 			HaltIfEndFound();
 			ExploreNeighbors();
 		}
-		print("finished Pathfinding?");
+		//print("finished Pathfinding?");
     }
 
     private void HaltIfEndFound()
@@ -111,7 +111,7 @@ public class Pathfinder : MonoBehaviour {
 			bool isOverlapping = grid.ContainsKey(waypoint.GetGridPos());
 			if (isOverlapping)
 			{
-				Debug.LogWarning("skipping overlapping block " + waypoint);
+				//Debug.LogWarning("skipping overlapping block " + waypoint);
 			} 
 			else
 			{
