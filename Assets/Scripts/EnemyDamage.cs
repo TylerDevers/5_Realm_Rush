@@ -5,28 +5,30 @@ using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour {
 
-	//expose the enemy collider, since this script is not attached that components object
-	[SerializeField] Collider collisionMesh;
-	[SerializeField] int hitPoints = 10;
+    [SerializeField] Collider collisionMesh;
+    [SerializeField] int hitPoints = 5;
 
-	private void OnParticleCollision(GameObject other)
-	{
-		ProcessHit();
-		if (hitPoints < 1)
-		{
-			KillEnemy();
-		}		
+	// Use this for initialization
+	void Start () {
+		
 	}
+    private void OnParticleCollision(GameObject other)
+    {
+        ProcessHit();
+        if (hitPoints <= 0)
+        {
+            KillEnemy();
+        }
+    }
+    
+    void ProcessHit()
+    {
+        hitPoints --;
+        print("current hitpoints are " + hitPoints);
+    }
 
     private void KillEnemy()
     {
         Destroy(gameObject);
-    }
-
-    private void ProcessHit()
-    {
-        hitPoints--;
-		//print("current hit points left: " + hitPoints);
-
     }
 }

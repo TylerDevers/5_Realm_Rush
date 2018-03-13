@@ -5,47 +5,40 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour {
 
-	[SerializeField] Transform objectPan;
-	[SerializeField] Transform targetEnemy;
-	[SerializeField] ParticleSystem projectileParticle;
-	[SerializeField] float attackRange = 30f;
-
-
-	// Use this for initialization
-	void Start () {
-		
-	}
+    [SerializeField] Transform objectToPan;
+    [SerializeField] Transform targetEnemy;
+    [SerializeField] float attackRange = 10f;
+    [SerializeField] ParticleSystem projectileParticle;
 	
 	// Update is called once per frame
 	void Update () {
-		if (targetEnemy)
-		{
-			objectPan.LookAt(targetEnemy);
-			FireAtEnemy();
-		}
-		else
-		{
-			Shoot(false);
-		}
-
+        if (targetEnemy)
+        {
+            objectToPan.LookAt(targetEnemy);
+            FireAtEnemy();
+        }
+        else
+        {
+            Shoot(false);
+        }
 	}
 
-	void FireAtEnemy()
-	{
-		float distanceToEnemy = Vector3.Distance(targetEnemy.transform.position, gameObject.transform.position);
-		if (distanceToEnemy <= attackRange)
-		{
-			Shoot(true);
-		}
-		else
-		{
-			Shoot(false);
-		}
-	}
+    private void FireAtEnemy()
+    {
+        float distanceToEnemy = Vector3.Distance(targetEnemy.transform.position, gameObject.transform.position);
+        if (distanceToEnemy <= attackRange)
+        {
+            Shoot(true);
+        }
+        else
+        {
+            Shoot(false);
+        }
+    }
 
     private void Shoot(bool isActive)
     {
-        var emmissionModule = projectileParticle.emission;
-		emmissionModule.enabled = isActive;
+        var emissionModule = projectileParticle.emission;
+        emissionModule.enabled = isActive;
     }
 }

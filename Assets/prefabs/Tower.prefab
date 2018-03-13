@@ -226,10 +226,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb977902a6cb4fecbb44446f92322df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPan: {fileID: 4150168758382408}
+  objectToPan: {fileID: 4150168758382408}
   targetEnemy: {fileID: 0}
-  projectileParticle: {fileID: 198452183168504916}
   attackRange: 30
+  projectileParticle: {fileID: 198452183168504916}
 --- !u!198 &198452183168504916
 ParticleSystem:
   m_ObjectHideFlags: 1
