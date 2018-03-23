@@ -34,20 +34,27 @@ public class Pathfinder : MonoBehaviour {
     {
 		if (path.Count <= 0)
 		{
-			path.Add(endWaypoint);
+			SetAsPath(endWaypoint);
+
 			Waypoint previous = endWaypoint.exploredFrom;
 			while (previous != startWaypoint)
 			{
-				path.Add(previous);
+				SetAsPath(previous);
 				previous = previous.exploredFrom;
 			}
-			path.Add(startWaypoint);
+			SetAsPath(startWaypoint);
 			path.Reverse();
 		} else 
 		{
 			print("path already exists");
 		}
     }
+
+	private void SetAsPath(Waypoint waypoint)
+	{
+		path.Add(waypoint);
+		waypoint.isPlaceable = false;
+	}
 
 
     private void BreadthFirstSearch() //using breadth first algorithm

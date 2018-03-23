@@ -9,6 +9,8 @@ public class Waypoint : MonoBehaviour {
 	public Waypoint exploredFrom;
 	Vector2Int gridPos;
 
+	public bool isPlaceable = true;
+
 	//getter methods for CubeEditor
 	public int GetGridSize()
 	{
@@ -32,6 +34,17 @@ public class Waypoint : MonoBehaviour {
 
 	void OnMouseOver()
 	{
-		print(gameObject.name);
+		if (Input.GetMouseButtonDown(0))
+		{
+			if (isPlaceable)
+			{
+				print(gameObject.name + " tower placeable");
+			} 
+			else 
+			{
+				print("not PLaceable");
+			}
+
+		}
 	}
 }
