@@ -8,8 +8,8 @@ public class Waypoint : MonoBehaviour {
 
 	public Waypoint exploredFrom;
 	Vector2Int gridPos;
-
 	public bool isPlaceable = true;
+	[SerializeField] private Tower towerPrefab;
 
 	//getter methods for CubeEditor
 	public int GetGridSize()
@@ -38,7 +38,8 @@ public class Waypoint : MonoBehaviour {
 		{
 			if (isPlaceable)
 			{
-				print(gameObject.name + " tower placeable");
+				Instantiate(towerPrefab, transform.position, Quaternion.identity);
+				isPlaceable = false;
 			} 
 			else 
 			{
@@ -47,4 +48,5 @@ public class Waypoint : MonoBehaviour {
 
 		}
 	}
+
 }
